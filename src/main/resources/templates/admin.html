@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f9f9f9; }
+        h2 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+        th { background: #eee; }
+        button { padding: 6px 12px; border: none; cursor: pointer; margin: 2px; border-radius: 4px; }
+        button:hover { opacity: 0.85; }
+        .btn-edit { background: #4CAF50; color: white; }
+        .btn-delete { background: #f44336; color: white; }
+        .btn-add { background: #2196F3; color: white; }
+        .btn-logout { background: #555; color: white; }
+        .logout { margin-top: 30px; }
+    </style>
+</head>
+<body>
+<h2>Список пользователей</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Email</th>
+        <th>Роли</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.roles}"></td>
+        <td>
+            <form th:action="@{/admin/edit/{id}(id=${user.id})}" method="post" style="display:inline;">
+                <button type="submit" class="btn-edit">Редактировать</button>
+            </form>
+            <form th:action="@{/admin/delete/{id}(id=${user.id})}" method="post" style="display:inline;">
+                <button type="submit" class="btn-delete">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+<form th:action="@{/admin/new}" method="post" style="display:inline;">
+    <button type="submit" class="btn-add">Добавить нового пользователя</button>
+</form>
+
+<div class="logout">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn-logout">Выйти</button>
+    </form>
+</div>
+</body>
+</html>

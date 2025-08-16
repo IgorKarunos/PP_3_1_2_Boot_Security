@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать пользователя</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f9f9f9; }
+        h1 { color: #333; }
+        form { background: #fff; padding: 20px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); width: 350px; }
+        label { display: block; margin-top: 10px; }
+        input { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { margin-top: 15px; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; background: #2196F3; color: #fff; }
+        button:hover { opacity: 0.85; }
+        a { display: inline-block; margin-top: 15px; color: #555; }
+    </style>
+</head>
+<body>
+<h1>Создать нового пользователя</h1>
+
+<form action="#" th:action="@{/admin}" th:object="${user}" method="post">
+    <label>Имя: <input type="text" th:field="*{name}" /></label>
+    <label>Email: <input type="email" th:field="*{email}" /></label>
+    <label>Пароль: <input type="password" th:field="*{password}" /></label>
+
+    <label>Роли:</label>
+    <div th:each="role : ${allRoles}">
+        <label>
+            <input type="checkbox" th:field="*{roles}" th:value="${role.id}" />
+            <span th:text="${role.name}"></span>
+        </label>
+    </div>
+
+    <button type="submit">Создать</button>
+</form>
+
+<a href="/admin">Назад</a>
+</body>
+</html>
