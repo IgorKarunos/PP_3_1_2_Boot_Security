@@ -17,7 +17,9 @@
 <body>
 <h1>Создать нового пользователя</h1>
 
-<form action="#" th:action="@{/admin}" th:object="${user}" method="post">
+<form th:action="@{/admin}" th:object="${user}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
     <label>Имя: <input type="text" th:field="*{name}" /></label>
     <label>Email: <input type="email" th:field="*{email}" /></label>
     <label>Пароль: <input type="password" th:field="*{password}" /></label>
