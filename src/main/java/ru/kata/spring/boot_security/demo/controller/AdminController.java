@@ -30,16 +30,9 @@ public class AdminController {
     @GetMapping
     public String adminPage(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        return "admin";
-    }
-
-    @GetMapping("/new")
-    public String newUserForm(Model model) {
-        List<Role> allRoles = roleService.getAllRoles();
         model.addAttribute("user", new User());
-        model.addAttribute("allRoles", allRoles);
-        logger.debug("Открыта форма создания пользователя");
-        return "new";
+        model.addAttribute("allRoles", roleService.getAllRoles());
+        return "admin";
     }
 
     @PostMapping
@@ -54,15 +47,6 @@ public class AdminController {
         userService.saveUser(user);
         logger.info("Создан новый пользователь: {}", user.getEmail());
         return "redirect:/admin";
-    }
-
-    // Теперь GET, а не POST — просто открывает форму
-    @GetMapping("/edit/{id}")
-    public String editUser(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("allRoles", roleService.getAllRoles());
-        logger.debug("Открыта форма редактирования пользователя с ID {}", id);
-        return "edit";
     }
 
     @PostMapping("/edit")

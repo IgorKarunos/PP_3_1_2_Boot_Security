@@ -5,16 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Главная страница</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 30px; background: #f0f0f0; }
-        h1 { color: #333; }
-        p { margin: 8px 0; }
-        a { display: inline-block; margin: 10px 0; padding: 8px 15px; text-decoration: none; border-radius: 4px; background: #2196F3; color: white; }
-        a:hover { opacity: 0.85; }
-        .logout { margin-top: 30px; }
-        button { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; background: #555; color: #fff; }
-        button:hover { opacity: 0.85; }
-    </style>
 </head>
 <body>
 <h1>Добро пожаловать!</h1>
@@ -31,7 +21,7 @@
         <a href="/user">Профиль пользователя</a>
     </div>
 
-    <div class="logout">
+    <div style="margin-top: 40px;">
         <form th:action="@{/logout}" method="post">
             <button type="submit">Выйти</button>
         </form>
@@ -42,5 +32,6 @@
     <p>Вы не вошли в систему.</p>
     <a href="/login">Войти</a>
 </div>
+
 </body>
 </html>
